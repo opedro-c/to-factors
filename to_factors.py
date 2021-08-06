@@ -38,11 +38,12 @@ if __name__ == '__main__':
                 if num <= 1:
                     raise ValueError
             except ValueError:
-                print('Unvalid number!')
+                print('Unvalid value!')
             else:
                 break
         return num
-    
+
+
     number = ask_number()
     result = format_to_factor(to_factor(number, show_process=True))
     print('Result: ', result)
