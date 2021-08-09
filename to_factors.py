@@ -14,8 +14,8 @@ def to_factor(num: int, show_process: bool=False) -> list:
 
 
 def to_superscript(num: int) -> str:
-    superscript = ('¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹')
-    return ''.join(map(lambda x: superscript[int(x) - 1], str(num)))
+    superscript = ('⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹')
+    return ''.join(map(lambda x: superscript[int(x)], str(num)))
     
 
 def format_to_factor(result: list) -> str:
