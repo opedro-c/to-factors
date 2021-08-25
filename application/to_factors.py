@@ -1,22 +1,41 @@
-def to_factor(num: int, show_process: bool=False) -> list:    
+from math import prod
+
+
+def validate_args(func):
+    def validate(num):
+        if num < 0:
+            raise ValueError('Number must be equal or bigger than 0')
+        if not isinstance(num, int):
+            raise TypeError('Number must be an instance of class <int>')
+        return func(num)
+    return validate
+
+
+@validate_args
+def to_factors(num: int) -> list:
     results = []
     c = 2
     while num > 1:
         while num % c == 0:
             results.append(c)
-            if show_process:
-                print(f'{int(num)}\t|{c}')
             num = num / c
         c += 1
-    if show_process:
-        print('1 \t|')
     return results
 
 
+@validate_args
 def to_superscript(num: int) -> str:
     superscript = ('⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹')
     return ''.join(map(lambda x: superscript[int(x)], str(num)))
-    
+
+
+def show_process(prime_factors: list) -> None:
+        product = prod(prime_factors)
+        for num in prime_factors:
+            print(f'{int(product)}\t| {num}')
+            product = product / num
+        print('1\t|')
+
 
 def format_to_factor(result: list) -> str:
     formatted = ''
@@ -31,6 +50,7 @@ def format_to_factor(result: list) -> str:
 
 
 if __name__ == '__main__':
+
     def ask_number() -> int:
         while True:
             try:
@@ -45,5 +65,7 @@ if __name__ == '__main__':
 
 
     number = ask_number()
-    result = format_to_factor(to_factor(number, show_process=True))
+    number_in_prime_factors = to_factors(number)
+    result = format_to_factor(number_in_prime_factors)
+    show_process(number_in_prime_factors)
     print('Result: ', result)
